@@ -12,17 +12,17 @@ log_filename = datetime.now().strftime("log_%Y-%m-%d_%H-%M-%S.txt")
 API_KEY = os.getenv("SHOPIFY_API_KEY")  # Pobranie klucza API z GitHub Secrets
 
 # Konfiguracja logowania
+# Update the logging configuration to support UTF-8 encoding
 logging.basicConfig(
-    level=logging.INFO,  # Możesz zmienić na DEBUG/WARNING/ERROR
+    level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(log_filename),  # Zapis do pliku
-        logging.StreamHandler()  # Wyświetlanie w konsoli
+        logging.FileHandler(log_filename, encoding='utf-8'),  # Ensure UTF-8 encoding
+        logging.StreamHandler()
     ]
 )
-from logging.handlers import TimedRotatingFileHandler
 
-log_handler = TimedRotatingFileHandler("server.log", when="midnight", interval=1, backupCount=7)
+log_handler = TimedRotatingFileHandler("server.log", when="midnight", interval=1, backupCount=7, encoding='utf-8')
 log_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 
 logging.getLogger().addHandler(log_handler)
