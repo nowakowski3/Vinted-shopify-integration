@@ -7,6 +7,7 @@ import os
 import time
 import logging
 from datetime import datetime
+from logging.handlers import TimedRotatingFileHandler
 log_filename = datetime.now().strftime("log_%Y-%m-%d_%H-%M-%S.txt")
 
 API_KEY = os.getenv("SHOPIFY_API_KEY")  # Pobranie klucza API z GitHub Secrets
